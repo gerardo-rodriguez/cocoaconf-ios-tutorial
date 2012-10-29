@@ -1,0 +1,90 @@
+iOS Tutorial
+CocoaConf PDX
+10/25/2012
+James Dempsey
+http://jamesdempsey.net
+
+Tapas Software
+http://tapas-software.net
+
+-------------
+
+Storyboards introduced in iOS5. 1 file contains entire flow of app. All navigation in one file. Prior, every new view would be separate file. Storyboards are the way Apple is moving devs.
+
+ARC (Automatic Reference Counting) is a good thing.
+
+-------------
+
+dot syntax is used to access properties.
+
+-------------
+
+"+" are class methods. Used mostly to "factory" new objects. You message the class, not the instance.
+
+"-" are instance methods. The instantiated object receives these methods.
+
+-------------
+
+concurrency:
+- atomic: takes longer to access, has to lock/unlock...lock/unlock
+- nonatomic is what you'll see most everywhere. Rule of thumb is to use nonatomic.
+
+memory management:
+- strong: the object will stick around, guaranteed to stick around.
+- weak: if nobody else wants the object, it'll go away
+- copy: when you hand me an object, I'll make a copy and then that copy is strong, names, numbers, strings use this.
+
+-------------
+
+Private interface
+
+You could instead put the outlet in the private interface. Outlets are good candidates for class extensions.
+
+In implementation file:
+
+@interface GFSViewController()
+
+@end
+
+-------------
+
+Delegation allows you to have a class that coordinates with another class to find out when key things happen. Allows you the ability to take additional actions. Sometimes, it allows you the ability to tweak the behavior of the class that has the delegate.
+
+Delegate methods are known as protocols. In Java, known as Interfaces.
+
+You can implement many protocols. 
+
+@interface SomeClass : SomeInheritedParentClass <ProtocoalDelegate>
+
+You can use protocol as a type
+
+-------------
+
+NSArray (not mutable) now has a new way to create them.
+
+NSArray *myArr = @[cookie, bread, stew];
+
+for in () is quicker to write:
+
+for(GFSRecipe *recipe in myArr) {
+	NSLog(recipe);
+}
+
+
+New syntax for creating NSDictionary (not mutable) literal:
+
+NSDictionary *recipes = @{@"cookie": cookie, @"bread": break, @"stew": stew};
+
+for(NSString *key in recipes) {
+	GFSRecipe *recipe = [recipes objectForKey:key];
+
+	NSLog(recipe);
+}
+
+You use a set when you want to not have two of anything. Don't have to loop through whole set, like in array.
+
+-------------
+
+Auto-Layout
+
+With auto-layout you no longer have programmatic direct access for setting frames. You set contraints or rules to allow the layout to happen.
